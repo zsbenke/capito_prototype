@@ -17,6 +17,7 @@ hu:
   activerecord:
     attributes:
       transaction:
+        created_at: "Létrehozva"
         account_id: "Fiók"
         category_id: "Kategória"
         payee: "Kedvezményezett"

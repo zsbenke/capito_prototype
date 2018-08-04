@@ -1,4 +1,5 @@
 <%= tag.tr id: dom_id(transaction), class: 'transaction' do %>
+  <td><%= l transaction.created_at, format: :short %></td>
   <td><%= transaction.category.name %></td>
   <td><%= transaction.account.name %></td>
   <td><%= transaction.payee %></td>
