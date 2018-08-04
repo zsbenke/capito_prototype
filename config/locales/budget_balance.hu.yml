@@ -1,0 +1,8 @@
+hu:
+  activerecord:
+    attributes:
+      budget_balance:
+        category: "Kategória"
+        budgeted: "Félretett"
+        spent: "Elköltött"
+        balance: "Elérhető"

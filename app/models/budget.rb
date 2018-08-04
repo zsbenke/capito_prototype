@@ -15,7 +15,7 @@ class Budget
   def expense_budget_balances
     collected = []
     Category.where.not(name: Category::INCOME_CATEGORIES).each do |category|
-      collected << BudgetBalance.find_or_initialize_by(category: category, month: current_month)
+      collected << BudgetBalance.find_or_create_by(category: category, month: current_month)
     end
 
     collected
@@ -24,7 +24,7 @@ class Budget
   def income_budget_balances
     collected = []
     Category.where(name: Category::INCOME_CATEGORIES).each do |category|
-      collected << BudgetBalance.find_or_initialize_by(category: category, month: current_month)
+      collected << BudgetBalance.find_or_create_by(category: category, month: current_month)
     end
 
     collected

@@ -1,0 +1,35 @@
+hu:
+  transaction:
+    name: "Tranzakció"
+    titles:
+      index: "Tranzakciók"
+      new: "Új tranzakció"
+      edit: "Tranzakció szerkesztése"
+    actions:
+      index: "Tranzakciók"
+      new: "Új tranzakció"
+      create: "Tranzakció létrehozása"
+      update: "Tranzakció frissítése"
+    confirmations:
+      destroy: "Biztos törlöd ezt a tranzakciót?"
+
+
+  activerecord:
+    attributes:
+      transaction:
+        account_id: "Fiók"
+        category_id: "Kategória"
+        payee: "Kedvezményezett"
+        amount: "Összeg"
+    errors:
+      models:
+        transaction:
+          attributes:
+            category:
+              required: "nem adtad meg a kategóriát"
+            account:
+              required: "nem adtad meg a fiókot"
+            payee:
+              blank: "nem adtad meg a kedvezményezettet"
+            amount:
+              blank: "nem adtad meg az összeget"

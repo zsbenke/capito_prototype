@@ -1,0 +1,46 @@
+<%= form_for(transaction) do |f| %>
+  <% if transaction.errors.any? %>
+    <%= render 'application/error_explanation', model: transaction %>
+  <% end %>
+
+  <div class="form_field inline">
+    <div class="field_label right">
+      <%= f.label :account_id %>
+    </div>
+    <div class="field_input">
+      <%= f.collection_select :account_id, Account.all, :id, :name %>
+    </div>
+  </div>
+
+  <div class="form_field inline">
+    <div class="field_label right">
+      <%= f.label :category_id %>
+    </div>
+    <div class="field_input">
+      <%= f.collection_select :category_id, Category.by_name, :id, :name, include_blank: true %>
+    </div>
+  </div>
+
+  <div class="form_field inline">
+    <div class="field_label right">
+      <%= f.label :payee %>
+    </div>
+    <div class="field_input">
+      <%= f.text_field :payee %>
+    </div>
+  </div>
+
+  <div class="form_field inline">
+    <div class="field_label right">
+      <%= f.label :amount %>
+    </div>
+    <div class="field_input">
+      <%= f.number_field :amount %>
+    </div>
+  </div>
+
+  <%= form_actions inline: true do %>
+    <%= f.submit @transaction.new_record? ? t('transaction.actions.create') : t('transaction.actions.update'), class: 'button' %>
+    <%= link_to t('shared.actions.cancel'), budgets_path, class: 'cancel_button' %>
+  <% end %>
+<% end %>

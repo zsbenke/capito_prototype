@@ -1,0 +1,18 @@
+<%= tag.tr id: dom_id(transaction), class: 'transaction' do %>
+  <td><%= transaction.category.name %></td>
+  <td><%= transaction.account.name %></td>
+  <td><%= transaction.payee %></td>
+  <td class="text_right"><%= transaction.amount %></td>
+  <td>
+    <ul class="record_table_actions">
+      <li>
+        <%= link_to t('shared.actions.edit'), edit_transaction_path(transaction), class: 'edit_button' %>
+      </li>
+      <li>
+        <%= link_to t('shared.actions.destroy'), transaction, method: :delete,
+              data: { confirm: t("transaction.confirmations.destroy") },
+              class: 'destroy_button' %>
+      </li>
+    </ul>
+  </td>
+<% end %>

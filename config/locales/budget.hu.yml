@@ -1,0 +1,9 @@
+hu:
+  budget:
+    name: "Költségvetés"
+    titles:
+      index: "Költségvetés"
+    actions:
+      index: "Költségvetés"
+    messages:
+      available_for_budget: "Elérhető összeg"

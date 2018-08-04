@@ -1,0 +1,36 @@
+<div class="grid">
+  <div class="unit content_body">
+    <header class="grid record_table_title">
+      <div class="unit section_title_container">
+        <h1 class="section_title"><%= t('budget.titles.index') %></h1>
+      </div>
+      <div class="unit record_table_title_actions">
+        <ul class="horizontal plain button_panel">
+          <li><%= link_to t('transaction.actions.index'), transactions_path, class: 'button secondary' %></li>
+          <li><%= link_to t('transaction.actions.new'), new_transaction_path, class: 'button' %></li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="record_table_wrapper">
+      <table class="record_table">
+        <thead>
+          <tr>
+            <%= render 'available_for_budget', budget: @budget %>
+          </tr>
+          <tr>
+            <th><%= column_title :budget_balance, :category %></th>
+            <th class="text_right"><%= column_title :budget_balance, :budgeted %></th>
+            <th class="text_right"><%= column_title :budget_balance, :spent %></th>
+            <th class="text_right"><%= column_title :budget_balance, :balance %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @budget.expense_budget_balances.each do |expense_budget| %>
+            <%= render 'budgets/budget_balances/budget_balance', budget_balance: expense_budget %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

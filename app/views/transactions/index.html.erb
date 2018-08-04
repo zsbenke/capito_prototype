@@ -1,0 +1,34 @@
+<div class="grid">
+  <div class="unit content_body">
+    <header class="grid record_table_title">
+      <div class="unit section_title_container">
+        <h1 class="section_title"><%= t('transaction.titles.index') %></h1>
+      </div>
+      <div class="unit record_table_title_actions">
+        <ul class="horizontal plain button_panel">
+          <li><%= link_to t('budget.actions.index'), budgets_path, class: 'button secondary' %></li>
+          <li><%= link_to t('transaction.actions.new'), new_transaction_path, class: 'button' %></li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="record_table_wrapper">
+      <table class="record_table">
+        <thead>
+          <tr>
+            <th><%= column_title :transaction, :category_id %></th>
+            <th><%= column_title :transaction, :account_id %></th>
+            <th><%= column_title :transaction, :payee %></th>
+            <th class="text_right"><%= column_title :transaction, :amount %></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= render @transactions %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

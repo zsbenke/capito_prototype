@@ -1,0 +1,7 @@
+<div class="info_panel error_explanation">
+  <ul>
+    <% model.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,56 @@
+.unit.content_body {
+}
+
+#available_for_budget {
+  text-align: center;
+  font-size: $font-size-big;
+}
+
+.balance_number {
+  color: $font-color-secondary;
+
+  &.positive {
+    font-weight: bold;
+    color: $color-green;
+  }
+
+  &.negative {
+    font-weight: bold;
+    color: $color-red;
+  }
+}
+
+.budget_balance {
+  td {
+    vertical-align: middle;
+  }
+}
+.budget_balance_category {
+  width: $unit-five;
+}
+
+.budget_balance_budgeted {
+  padding: 0;
+  width: $unit-three;
+
+  .form_field {
+    margin-bottom: 0;
+
+    input {
+      text-align: right;
+      background-color: transparent;
+      border-radius: 0;
+      border-color: transparent;
+      box-shadow: none;
+
+      &:focus {
+        background-color: rgba($color-blue, 0.1);
+      }
+    }
+  }
+}
+
+.budget_balance_spent, .budget_balance_balance {
+  width: $unit-two;
+  text-align: right;
+}

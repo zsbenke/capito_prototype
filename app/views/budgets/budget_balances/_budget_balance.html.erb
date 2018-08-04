@@ -1,0 +1,14 @@
+<%= tag.tr id: dom_id(budget_balance), class: 'budget_balance' do %>
+  <td class="budget_balance_category"><%= budget_balance.category.name %></td>
+  <td class="budget_balance_budgeted">
+    <div class="form_field">
+      <div class="field_input">
+        <%= text_field_for_budget_balance_budgeted budget_balance %>
+      </div>
+    </div>
+  </td>
+  <td class="budget_balance_spent text_right"><%= balance_tag budget_balance.spent_balance %></td>
+  <td class="budget_balance_balance text_right">
+    <%= balance_tag budget_balance.balance  %>
+  </td>
+<% end %>
