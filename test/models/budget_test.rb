@@ -65,7 +65,7 @@ class BudgetTest < ActiveSupport::TestCase
     assert_equal 0.0, budget.find_budget_balance(apps).balance
 
     # Spent 5000 in groceries
-    Transaction.create(category: groceries, account: account, amount: 5000)
+    Transaction.create(category: groceries, account: account, amount: -5000)
     assert_equal 90000.0, budget.available_for_budget
     assert_equal 5000.0, budget.find_budget_balance(groceries).balance
     assert_equal 0.0, budget.find_budget_balance(apps).balance
@@ -83,7 +83,7 @@ class BudgetTest < ActiveSupport::TestCase
     assert_equal 2000.0, budget.find_budget_balance(apps).balance
 
     # Spent 1500 in apps
-    Transaction.create(category: apps, account: account, amount: 1500)
+    Transaction.create(category: apps, account: account, amount: -1500)
     assert_equal 83000.0, budget.available_for_budget
     assert_equal 10000.0, budget.find_budget_balance(groceries).balance
     assert_equal 500.0, budget.find_budget_balance(apps).balance
@@ -102,7 +102,7 @@ class BudgetTest < ActiveSupport::TestCase
     assert_equal 60000.0, budget.find_budget_balance(groceries).balance
     assert_equal 500.0, budget.find_budget_balance(apps).balance
 
-    Transaction.create(category: apps, account: account, amount: 35000)
+    Transaction.create(category: apps, account: account, amount: -35000)
     assert_equal 33000.0, budget.available_for_budget
     assert_equal 60000.0, budget.find_budget_balance(groceries).balance
     assert_equal -34500.0, budget.find_budget_balance(apps).balance
