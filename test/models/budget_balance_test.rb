@@ -66,4 +66,11 @@ class BudgetBalanceTest < ActiveSupport::TestCase
     groceries_february.update(budgeted: 4000)
     refute groceries_february.overspent?
   end
+
+  test "should return income status of budget_balance" do
+    income_january = BudgetBalance.new(category: categories(:income), month: '2018-01-01'.to_date)
+    assert income_january.income?
+    groceries_february = budget_balances :groceries_february
+    refute groceries_february.income?
+  end
 end

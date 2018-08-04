@@ -5,6 +5,8 @@ class BudgetBalance < ApplicationRecord
 
   before_save :adjust_month
 
+  delegate :income?, to: :category
+
   def balance
     end_of_month = month.end_of_month
     budgeted_sum = self.class.where("month < ?", end_of_month).sum(:budgeted)
