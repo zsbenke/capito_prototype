@@ -17,9 +17,9 @@ class AccountTest < ActiveSupport::TestCase
     10.times do
       category = Category.order(Arel.sql("RANDOM()")).limit(Category.count).first
       transaction = Transaction.create(
+        account: account,
         category: category,
-        amount: random_amount,
-        account: account
+        amount: random_amount
       )
       assert transaction.valid?
       balance_assertion += transaction.amount
