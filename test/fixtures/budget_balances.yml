@@ -1,0 +1,19 @@
+groceries_january:
+  category: groceries
+  budgeted: 0
+  month: 2018-01-01
+
+utilities_january:
+  category: utilities
+  budgeted: 0
+  month: 2018-01-01
+
+groceries_february:
+  category: groceries
+  budgeted: 0
+  month: 2018-01-01
+
+utilities_february:
+  category: utilities
+  budgeted: 0
+  month: 2018-01-01
