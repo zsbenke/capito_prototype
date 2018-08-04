@@ -7,3 +7,10 @@ hu:
       index: "Költségvetés"
     messages:
       available_for_budget: "Elérhető összeg"
+  activemodel:
+    errors:
+      models:
+        budget:
+          attributes:
+            current_month:
+              blank: "can't be blank"
