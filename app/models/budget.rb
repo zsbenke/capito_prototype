@@ -15,6 +15,7 @@ class Budget
   def budget_balances
     collected = []
     Category.all.each do |category|
+      next if category.income?
       collected << BudgetBalance.find_or_initialize_by(category: category, month: current_month)
     end
 

@@ -8,6 +8,14 @@ class CategoryTest < ActiveSupport::TestCase
     assert category.errors.messages[:name].present?
   end
 
+  test "should return income category status" do
+    category = categories :income
+    assert category.income?
+
+    category = categories :groceries
+    refute category.income?
+  end
+
   test "should calculate balance" do
     account = accounts :otp_smart
     category = categories :groceries

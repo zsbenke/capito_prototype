@@ -28,7 +28,8 @@ class BudgetTest < ActiveSupport::TestCase
 
     assert_includes budget.budget_balances, groceries_january
     assert_includes budget.budget_balances, utilities_january
-    assert_equal Category.count, budget.budget_balances.count
+    refute_includes budget.budget_balances, categories(:income)
+    assert_equal Category.count - 1, budget.budget_balances.count
     assert_equal [budget.current_month], budget.budget_balances.map(&:month).uniq
   end
 end
