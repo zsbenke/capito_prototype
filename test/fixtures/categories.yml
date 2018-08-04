@@ -1,7 +1,26 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+income:
+  name: Income
 
-one:
-  name: MyString
+groceries:
+  name: Groceries
 
-two:
-  name: MyString
+utilities:
+  name: Utilities
+
+subscriptions:
+  name: Subscriptions
+
+apps:
+  name: Apps
+
+entertainment:
+  name: Entertainment
+
+travel:
+  name: Travel
+
+gifts:
+  name: Gifts
+
+others:
+  name: Others
