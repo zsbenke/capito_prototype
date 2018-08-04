@@ -1,9 +1,7 @@
 class Account < ApplicationRecord
+  include Balancable
+
   has_many :transactions
 
   validates :name, presence: true
-
-  def balance
-    self.transactions.sum(:amount)
-  end
 end
