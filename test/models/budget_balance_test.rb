@@ -19,7 +19,7 @@ class BudgetBalanceTest < ActiveSupport::TestCase
   end
 
   test "should return balance for the current month" do
-    travel_to "2018-01-15".to_time
+    travel_to "2018-01-15".to_date
 
     groceries_january = budget_balances :groceries_january
     account = accounts :otp_smart
@@ -30,10 +30,11 @@ class BudgetBalanceTest < ActiveSupport::TestCase
     Transaction.create account: account, category: category, amount: -500
     Transaction.create account: account, category: category, amount: -2000
 
+    assert_equal 10000, groceries_january.budgeted_balance
     assert_equal -3500.0, category.balance
     assert_equal 6500.0, groceries_january.balance
 
-    travel_to "2018-02-15"
+    travel_to "2018-02-15".to_date
 
     groceries_february = budget_balances :groceries_february
 
@@ -41,14 +42,17 @@ class BudgetBalanceTest < ActiveSupport::TestCase
     Transaction.create account: account, category: category, amount: -1000
     Transaction.create account: account, category: category, amount: -1000
 
+    assert_equal 15000, groceries_february.budgeted_balance
     assert_equal -5500, category.balance
     assert_equal 9500, groceries_february.balance
 
     Transaction.create account: account, category: category, amount: 1000
+    assert_equal 15000, groceries_february.budgeted_balance
     assert_equal -4500, category.balance
     assert_equal 10500, groceries_february.balance
 
     Transaction.create account: account, category: category, amount: -11000
+    assert_equal 15000, groceries_february.budgeted_balance
     assert_equal -15500, category.balance
     assert_equal -500, groceries_february.balance
   end

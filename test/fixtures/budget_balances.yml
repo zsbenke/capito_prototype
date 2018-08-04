@@ -11,9 +11,9 @@ utilities_january:
 groceries_february:
   category: groceries
   budgeted: 0
-  month: 2018-01-01
+  month: 2018-02-01
 
 utilities_february:
   category: utilities
   budgeted: 0
-  month: 2018-01-01
+  month: 2018-02-01
