@@ -32,4 +32,12 @@ class BudgetTest < ActiveSupport::TestCase
     assert_equal Category.count - 1, budget.expense_budget_balances.count
     assert_equal [budget.current_month], budget.expense_budget_balances.map(&:month).uniq
   end
+
+  test "should return income budget_balance objects for current_month" do
+    budget = Budget.new(current_month: "2018-01-15".to_date)
+    assert_equal 1, budget.income_budget_balances.count
+    assert_equal [budget.current_month], budget.income_budget_balances.map(&:month).uniq
+    assert_equal Category::INCOME_CATEGORIES, budget.income_budget_balances
+      .map { |b| b.category.name }.uniq
+  end
 end

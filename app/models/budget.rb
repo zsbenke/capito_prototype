@@ -20,6 +20,10 @@ class Budget
 
     collected
   end
+
+  def income_budget_balances
+    collected = []
+    Category.where(name: Category::INCOME_CATEGORIES).each do |category|
       collected << BudgetBalance.find_or_initialize_by(category: category, month: current_month)
     end
 
