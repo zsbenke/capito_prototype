@@ -12,7 +12,7 @@ class Budget
     end
   end
 
-  def budget_balances
+  def expense_budget_balances
     collected = []
     Category.all.each do |category|
       next if category.income?

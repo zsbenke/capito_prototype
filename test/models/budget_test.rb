@@ -21,15 +21,15 @@ class BudgetTest < ActiveSupport::TestCase
     assert_equal "2018-01-01",  budget.current_month.strftime("%Y-%m-%d")
   end
 
-  test "should return budget balances for current_month" do
+  test "should return expense budget_balance objects for current_month" do
     budget = Budget.new(current_month: "2018-01-15".to_date)
     groceries_january = budget_balances(:groceries_january)
     utilities_january = budget_balances(:utilities_january)
 
-    assert_includes budget.budget_balances, groceries_january
-    assert_includes budget.budget_balances, utilities_january
-    refute_includes budget.budget_balances, categories(:income)
-    assert_equal Category.count - 1, budget.budget_balances.count
-    assert_equal [budget.current_month], budget.budget_balances.map(&:month).uniq
+    assert_includes budget.expense_budget_balances, groceries_january
+    assert_includes budget.expense_budget_balances, utilities_january
+    refute_includes budget.expense_budget_balances, categories(:income)
+    assert_equal Category.count - 1, budget.expense_budget_balances.count
+    assert_equal [budget.current_month], budget.expense_budget_balances.map(&:month).uniq
   end
 end
