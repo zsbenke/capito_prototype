@@ -30,6 +30,45 @@ class Budget
     collected
   end
 
+  def available_for_budget
+    balance = 0
+
+    income_budget_balances.each do |budget_balance|
+      balance += budget_balance.balance
+    end
+
+    expense_budget_balances.each do |budget_balance|
+      balance -= budget_balance.budgeted_balance
+    end
+
+    balance
+  end
+
+  def add(amount, to:)
+    budget_balance = find_budget_balance to
+    budget_balance.budgeted = amount
+    budget_balance.save
+  end
+
+  def move(amount, from:, to:)
+    budget_balance_from = find_budget_balance from
+    budget_balance_to = find_budget_balance to
+    budget_balance_from.budgeted -= amount
+    budget_balance_to.budgeted += amount
+    budget_balance_from.save
+    budget_balance_to.save
+  end
+
+  def remove(amount, from:)
+    budget_balance = find_budget_balance from
+    budget_balance.budgeted -= amount
+    budget_balance.save
+  end
+
+  def find_budget_balance(category)
+    expense_budget_balances.find { |bb| bb.category == category }
+  end
+
   private
 
   def valid_date?(value)

@@ -40,4 +40,79 @@ class BudgetTest < ActiveSupport::TestCase
     assert_equal Category::INCOME_CATEGORIES, budget.income_budget_balances
       .map { |b| b.category.name }.uniq
   end
+
+  test "should update balances" do
+    account = accounts :otp_smart
+    budget = Budget.new(current_month: "2018-01-15".to_date)
+    income = categories :income
+    groceries = categories :groceries
+    apps = categories :apps
+
+    travel_to "2018-01-15".to_date
+
+    Transaction.create(category: income, account: account, amount: 100000)
+    assert_equal 100000.0, budget.available_for_budget
+    assert_equal 0.0, budget.find_budget_balance(groceries).balance
+    assert_equal 0.0, budget.find_budget_balance(apps).balance
+
+    budget.add(10000, to: groceries)
+    assert_equal 90000.0, budget.available_for_budget
+    assert_equal 10000.0, budget.find_budget_balance(groceries).balance
+    assert_equal 0.0, budget.find_budget_balance(apps).balance
+
+    Transaction.create(category: groceries, account: account, amount: 5000)
+    assert_equal 90000.0, budget.available_for_budget
+    assert_equal 5000.0, budget.find_budget_balance(groceries).balance
+    assert_equal 0.0, budget.find_budget_balance(apps).balance
+
+    budget.add(15000, to: groceries)
+    assert_equal 85000.0, budget.available_for_budget
+    assert_equal 10000.0, budget.find_budget_balance(groceries).balance
+    assert_equal 0.0, budget.find_budget_balance(apps).balance
+
+    budget.add(2000, to: apps)
+    assert_equal 83000.0, budget.available_for_budget
+    assert_equal 10000.0, budget.find_budget_balance(groceries).balance
+    assert_equal 2000.0, budget.find_budget_balance(apps).balance
+
+    Transaction.create(category: apps, account: account, amount: 1500)
+    assert_equal 83000.0, budget.available_for_budget
+    assert_equal 10000.0, budget.find_budget_balance(groceries).balance
+    assert_equal 500.0, budget.find_budget_balance(apps).balance
+
+    budget.current_month = "2018-02-01".to_date
+    assert_equal 83000.0, budget.available_for_budget
+    assert_equal 10000.0, budget.find_budget_balance(groceries).balance
+    assert_equal 500.0, budget.find_budget_balance(apps).balance
+
+    budget.add(50000, to: groceries)
+    assert_equal 33000.0, budget.available_for_budget
+    assert_equal 60000.0, budget.find_budget_balance(groceries).balance
+    assert_equal 500.0, budget.find_budget_balance(apps).balance
+
+    Transaction.create(category: apps, account: account, amount: 35000)
+    assert_equal 33000.0, budget.available_for_budget
+    assert_equal 60000.0, budget.find_budget_balance(groceries).balance
+    assert_equal -34500.0, budget.find_budget_balance(apps).balance
+
+    budget.current_month = "2018-03-01".to_date
+    assert_equal 33000.0, budget.available_for_budget
+    assert_equal 60000.0, budget.find_budget_balance(groceries).balance
+    assert_equal -34500.0, budget.find_budget_balance(apps).balance
+
+    budget.add(34500, to: apps)
+    assert_equal -1500.0, budget.available_for_budget
+    assert_equal 60000.0, budget.find_budget_balance(groceries).balance
+    assert_equal 0.0, budget.find_budget_balance(apps).balance
+
+    budget.remove(1500, from: groceries)
+    assert_equal 0.0, budget.available_for_budget
+    assert_equal 58500.0, budget.find_budget_balance(groceries).balance
+    assert_equal 0.0, budget.find_budget_balance(apps).balance
+
+    budget.move(10000, from: groceries, to: apps)
+    assert_equal 0.0, budget.available_for_budget
+    assert_equal 48500.0, budget.find_budget_balance(groceries).balance
+    assert_equal 10000.0, budget.find_budget_balance(apps).balance
+  end
 end

@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2018_08_04_132330) do
 
   create_table "budget_balances", force: :cascade do |t|
     t.integer "category_id"
-    t.float "budgeted"
+    t.float "budgeted", default: 0.0
     t.date "month"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
