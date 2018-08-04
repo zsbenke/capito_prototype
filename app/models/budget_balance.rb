@@ -8,12 +8,14 @@ class BudgetBalance < ApplicationRecord
   delegate :income?, to: :category
 
   def balance
-    return spent_balance if income?
+    end_of_month = month.end_of_month
+    category_balance = category.balance(until_date: end_of_month)
+    return category_balance if income?
 
-    expenses_balance = if spent_balance < 0
-      budgeted_balance - spent_balance.abs
+    expenses_balance = if category_balance < 0
+      budgeted_balance - category_balance.abs
     else
-      budgeted_balance - spent_balance
+      budgeted_balance - category_balance
     end
     return expenses_balance
   end
@@ -26,8 +28,9 @@ class BudgetBalance < ApplicationRecord
   end
 
   def spent_balance
+    beginning_of_month = month.beginning_of_month
     end_of_month = month.end_of_month
-    category.balance(until_date: end_of_month)
+    category_balance = category.balance(start_date: beginning_of_month, until_date: end_of_month)
   end
 
   def overspent?
