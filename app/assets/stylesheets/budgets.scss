@@ -50,6 +50,30 @@
   }
 }
 
+.month_pager {
+  margin-bottom: $grid-gutter;
+
+  ul {
+    justify-content: space-between;
+
+    li {
+      width: $unit-four;
+      text-align: center;
+      font-weight: bold;
+
+      &:first-child {
+        text-align: left;
+        font-weight: normal;
+      }
+
+      &:last-child {
+        text-align: right;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
 .budget_balance_spent, .budget_balance_balance {
   width: $unit-two;
   text-align: right;

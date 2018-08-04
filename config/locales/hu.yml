@@ -9,6 +9,7 @@ hu:
       default: "%Y-%m-%d"
       short: "%b %d"
       long: "%Y. %B %e."
+      year_and_month: "%Y. %B"
 
     day_names: ["vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat"]
     abbr_day_names: ["V", "H", "K", "Sze", "Cs", "P", "Szo"]

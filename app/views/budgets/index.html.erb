@@ -12,6 +12,14 @@
       </div>
     </header>
 
+    <header class="month_pager">
+      <ul class="horizontal plain">
+        <li><%= previous_month_link(@budget) %></li>
+        <li><%= l @budget.current_month, format: :year_and_month %></li>
+        <li><%= next_month_link(@budget) %></li>
+      </ul>
+    </header>
+
     <div class="record_table_wrapper">
       <table class="record_table">
         <thead>

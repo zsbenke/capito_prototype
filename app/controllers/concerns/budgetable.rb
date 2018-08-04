@@ -9,10 +9,10 @@ module Budgetable
     end
 
     def current_month
-      initial_month = Date.current
+      initial_month = Date.current.strftime("%Y-%m-%d").to_date
       raw_month = params.fetch(:current_month, initial_month)
       begin
-        raw_month.strptime("%Y-%m-%d")
+        DateTime.strptime(raw_month, "%Y-%m-%d").strftime("%Y-%m-%d").to_date
       rescue
         initial_month
       end
