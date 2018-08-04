@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: one
+  account: one
+  amount: 1.5
+  payee: MyString
+  note: MyText
+
+two:
+  category: two
+  account: two
+  amount: 1.5
+  payee: MyString
+  note: MyText
